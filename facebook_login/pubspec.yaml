@@ -31,7 +31,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: io.flutter.plugins.facebooklogin
+        package: com.kydarun.facebook.login
         pluginClass: FacebookLoginPlugin
       ios:
         pluginClass: FacebookLoginPlugin

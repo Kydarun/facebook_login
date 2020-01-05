@@ -67,9 +67,16 @@ packages:
   facebook_login:
     dependency: "direct main"
     description:
-      path: facebook_login
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
+  facebook_login_platform_interface:
+    dependency: transitive
+    description:
+      path: facebook_login_platform_interface
       ref: HEAD
-      resolved-ref: "174763ca893789847a437dac75f3019cafc94dab"
+      resolved-ref: "0b875557e2e6ff05a9cc66a2fdea1049d54d4030"
       url: "https://github.com/Kydarun/facebook_login.git"
     source: git
     version: "0.0.1"
@@ -202,3 +209,4 @@ packages:
     version: "3.5.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"
+  flutter: ">=1.10.0 <2.0.0"

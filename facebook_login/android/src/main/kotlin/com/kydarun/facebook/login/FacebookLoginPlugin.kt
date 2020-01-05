@@ -1,10 +1,13 @@
-package com.kydarun.facebook.login.facebook_login
+package com.kydarun.facebook.login
 
+import android.app.Activity
 import androidx.annotation.NonNull
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
@@ -12,16 +15,16 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** FacebookLoginPlugin */
-class FacebookLoginPlugin(private val registrar: Registrar) : FlutterPlugin, MethodCallHandler {
+class FacebookLoginPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   private val loginManager: LoginManager = LoginManager.getInstance()
   private val callback: CallbackManager = CallbackManager.Factory.create()
   private val resultDelegate: FacebookLoginResultDelegate = FacebookLoginResultDelegate(callback)
+  private var activity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     val channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.kydarun/facebook_login")
-    channel.setMethodCallHandler(FacebookLoginPlugin(registrar))
+    channel.setMethodCallHandler(FacebookLoginPlugin())
     loginManager.registerCallback(callback, resultDelegate)
-    registrar.addActivityResultListener(resultDelegate)
   }
 
   // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -37,9 +40,32 @@ class FacebookLoginPlugin(private val registrar: Registrar) : FlutterPlugin, Met
     @JvmStatic
     fun registerWith(registrar: Registrar) {
       val channel = MethodChannel(registrar.messenger(), "com.kydarun/facebook_login")
-      channel.setMethodCallHandler(FacebookLoginPlugin(registrar))
+      channel.setMethodCallHandler(FacebookLoginPlugin())
+        val callback: CallbackManager = CallbackManager.Factory.create()
+        val loginManager: LoginManager = LoginManager.getInstance()
+        val resultDelegate = FacebookLoginResultDelegate(callback)
+        loginManager.registerCallback(callback, resultDelegate)
+        registrar.addActivityResultListener(resultDelegate)
     }
   }
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        binding.addActivityResultListener(resultDelegate)
+        activity = binding.activity
+    }
+
+    override fun onDetachedFromActivity() {
+        activity = null
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        binding.addActivityResultListener(resultDelegate)
+        activity = binding.activity
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+        activity = null
+    }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     when (call.method) {
@@ -49,7 +75,7 @@ class FacebookLoginPlugin(private val registrar: Registrar) : FlutterPlugin, Met
         "login" -> {
           resultDelegate.setPendingResult("login", result)
           val permissions: List<String> = call.argument<List<String>>("permissions") ?: listOf()
-          loginManager.logIn(registrar.activity(), permissions)
+          loginManager.logIn(activity, permissions)
         }
         "logout" -> {
           loginManager.logOut();

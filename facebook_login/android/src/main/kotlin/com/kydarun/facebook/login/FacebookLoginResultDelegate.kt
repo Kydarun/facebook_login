@@ -1,4 +1,4 @@
-package com.kydarun.facebook.login.facebook_login
+package com.kydarun.facebook.login
 
 import android.content.Intent
 import com.facebook.AccessToken
