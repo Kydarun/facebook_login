@@ -67,9 +67,11 @@ packages:
   facebook_login_web:
     dependency: "direct dev"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: facebook_login_web
+      ref: HEAD
+      resolved-ref: "174763ca893789847a437dac75f3019cafc94dab"
+      url: "https://github.com/Kydarun/facebook_login.git"
+    source: git
     version: "0.0.1"
   flutter:
     dependency: "direct main"

@@ -18,7 +18,9 @@ dev_dependencies:
     sdk: flutter
 
   facebook_login_web:
-    path: ../
+    git:
+      url: https://github.com/Kydarun/facebook_login.git
+      path: facebook_login_web
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
