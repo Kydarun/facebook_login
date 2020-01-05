@@ -65,7 +65,7 @@ packages:
     source: hosted
     version: "0.1.3"
   facebook_login:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       path: facebook_login
       ref: HEAD
