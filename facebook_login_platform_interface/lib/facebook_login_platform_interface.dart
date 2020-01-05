@@ -1,6 +1,6 @@
-library facebook_login_platform_interface;
+import 'src/types.dart';
 
-part 'src/types.dart';
+export 'src/types.dart';
 
 abstract class FacebookLoginPlatform {
   FacebookLoginPlatform();

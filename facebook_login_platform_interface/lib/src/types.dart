@@ -1,5 +1,3 @@
-part of facebook_login_platform_interface;
-
 class FacebookLoginResult {
   final FacebookLoginStatus status;
   final FacebookAccessToken accessToken;
