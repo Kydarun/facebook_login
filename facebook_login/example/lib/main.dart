@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:facebook_login/facebook_login.dart';
-import 'package:facebook_login_platform_interface/facebook_login_platform_interface.dart';
 
 void main() => runApp(MyApp());
 

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:facebook_login_platform_interface/facebook_login_platform_interface.dart';
 
-class FacebookLogin extends FacebookLoginPlatform {
+class FacebookLogin {
   static const MethodChannel _channel =
       const MethodChannel('com.kydarun/facebook_login');
 
