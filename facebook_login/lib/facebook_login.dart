@@ -10,7 +10,7 @@ class FacebookLogin {
   FacebookLogin();
 
   Future<FacebookLoginResult> login(List<String> permissions) async {
-    final Map<dynamic, dynamic> result = await _channel.invokeMethod('logIn', {
+    final Map<dynamic, dynamic> result = await _channel.invokeMethod('login', {
       'permissions': permissions,
     });
     return FacebookLoginResult.fromMap(result);
