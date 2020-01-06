@@ -69,7 +69,7 @@ packages:
     description:
       path: facebook_login_platform_interface
       ref: HEAD
-      resolved-ref: "05d629f69a02183313e113894c865737a48a0648"
+      resolved-ref: "31c3dfe75dfac96ea8b21cf61c87b37efda67059"
       url: "https://github.com/Kydarun/facebook_login.git"
     source: git
     version: "0.0.1"

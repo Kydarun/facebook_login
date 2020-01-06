@@ -34,7 +34,10 @@ Future<void> injectJSLibraries(List<String> libraries,
   });
   final html.ScriptElement initScript = html.ScriptElement();
   String fbID = html.querySelector('meta[name=fb-app-id]')?.getAttribute('content') ?? '';
-  String fbInitScript = await rootBundle.loadString('fb_init.js');
+  String fbInitScript = await rootBundle.loadString('fb_init.js').catchError((e, stacktrace) {
+    print('$e');
+    print('$stacktrace');
+  });
   initScript.appendText(fbInitScript.replaceAll('[APP-ID]', fbID));
   (target ?? html.querySelector('head')).children.addAll(tags);
   return Future.wait(loading);
